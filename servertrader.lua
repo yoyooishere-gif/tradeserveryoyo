@@ -8,7 +8,7 @@ local LocalPlayer    = Players.LocalPlayer
 
 -- Target info yang kamu kasih:
 local TARGET_PLACE_VERSION = 5649
-local TARGET_JOBID         = "8f9543ba-57f9-460e-b9de-9b8c14a85108"
+local TARGET_JOBID         = "f01fafd6-0042-4233-84fd-07f7f1b79390"
 
 -- Info versi sekarang (buat dicek di output)
 print("[ServerHop] Versi server sekarang :", game.PlaceVersion)
