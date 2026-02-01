@@ -7,7 +7,7 @@ local Players        = game:GetService("Players")
 local LocalPlayer    = Players.LocalPlayer
 
 -- Target info yang kamu kasih:
-local TARGET_PLACE_VERSION = 5649
+local TARGET_PLACE_VERSION = 5650
 local TARGET_JOBID         = "f01fafd6-0042-4233-84fd-07f7f1b79390"
 
 -- Info versi sekarang (buat dicek di output)
