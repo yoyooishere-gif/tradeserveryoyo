@@ -1,31 +1,29 @@
-if not game:IsLoaded() then
-    game.Loaded:Wait()
+--==[ VersionAPI – Cek Server Version Dalam Range ]==--
+
+local VersionAPI = {}
+
+-- 🛠 Konfigurasi default range
+VersionAPI.MinVersion = 5649
+VersionAPI.MaxVersion = 5660
+
+-- Ambil versi server sekarang
+function VersionAPI.GetCurrentVersion()
+    local ok, ver = pcall(function()
+        return tonumber(game.PlaceVersion)
+    end)
+    if ok and ver then
+        return ver
+    end
+    return 0
 end
 
-local TeleportService = game:GetService("TeleportService")
-local Players        = game:GetService("Players")
-local LocalPlayer    = Players.LocalPlayer
+-- Cek apakah versi dalam range
+function VersionAPI.IsInRange(minV, maxV)
+    minV = minV or VersionAPI.MinVersion
+    maxV = maxV or VersionAPI.MaxVersion
 
--- Target info yang kamu kasih:
-local TARGET_PLACE_VERSION = 5650
-local TARGET_JOBID         = "f01fafd6-0042-4233-84fd-07f7f1b79390"
-
--- Info versi sekarang (buat dicek di output)
-print("[ServerHop] Versi server sekarang :", game.PlaceVersion)
-print("[ServerHop] Target server version :", TARGET_PLACE_VERSION)
-
--- Kalau kebetulan kamu sudah di versi / server yang sama:
-if game.PlaceVersion == TARGET_PLACE_VERSION and game.JobId == TARGET_JOBID then
-    warn("[ServerHop] Kamu sudah di server yang dicari (version & JobId cocok).")
-    return
+    local ver = VersionAPI.GetCurrentVersion()
+    return ver >= minV and ver <= maxV, ver
 end
 
-warn("[ServerHop] Coba teleport ke server target...")
-local ok, err = pcall(function()
-    TeleportService:TeleportToPlaceInstance(game.PlaceId, TARGET_JOBID, LocalPlayer)
-end)
-
-if not ok then
-    warn("[ServerHop] Teleport ke JobId gagal:", err)
-    warn("[ServerHop] Kemungkinan server sudah mati / penuh / dibatasi.")
-end
+return VersionAPI
